@@ -1,6 +1,4 @@
-﻿@Model string
-
-<ul class="nav navbar-nav side-nav">
+﻿<ul class="nav navbar-nav side-nav">
     <li @(Model == "dashboard" ? "class=active" : "")><a href="/admin"><i class="fa fa-bullseye"></i> Dashboard</a></li>
     <li @(Model == "portfolio" ? "class=active" : "")><a href="/admin/portfolio"><i class="fa fa-tasks"></i> Portfolio</a></li>
     <li @(Model == "blog" ? "class=active" : "")><a href="/admin/blog"><i class="fa fa-globe"></i> Blog</a></li>
