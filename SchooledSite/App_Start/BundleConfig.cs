@@ -24,10 +24,10 @@ namespace SchooledSite
                       "~/js/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/bootstrap/css/bootstrap.css",
+                      "~/css/bootstrap.css",
                       "~/css/local.css",
-                      "~/font-awesome/css/font-awesome.css",
-                      "~/Content/site.css"));
+                      "~/fonts/css/font-awesome.css",
+                      "~/css/site.css"));
         }
     }
 }
