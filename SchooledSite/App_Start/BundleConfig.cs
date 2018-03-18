@@ -25,7 +25,7 @@ namespace SchooledSite
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/css/bootstrap.css",
-                      "~/css/local.css",
+                      "~/css/admin.css",
                       "~/fonts/css/font-awesome.css",
                       "~/css/site.css"));
         }
