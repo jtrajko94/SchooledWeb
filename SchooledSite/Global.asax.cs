@@ -33,6 +33,7 @@ namespace SchooledSite
         {
             AreaRegistration.RegisterAllAreas();
             RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
