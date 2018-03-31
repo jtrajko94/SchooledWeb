@@ -27,6 +27,9 @@ namespace SchooledSite
             routes.MapRoute("AdminForms", "admin/forms", new { controller = "Admin", action = "Forms" });
             routes.MapRoute("AdminPortfolio", "admin/portfolio", new { controller = "Admin", action = "Portfolio" });
             routes.MapRoute("AdminTypography", "admin/typography", new { controller = "Admin", action = "Typography" });
+
+            //Admin Service Routing
+            routes.MapRoute("AdminLoginService", "ws/admin/login", new { controller = "AdminService", action = "Login" });
         }
 
         protected void Application_Start()

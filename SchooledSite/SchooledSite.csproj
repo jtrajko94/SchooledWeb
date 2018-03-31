@@ -178,11 +178,21 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminServiceController.cs" />
     <Compile Include="Controllers\WebsiteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminUserModel.cs" />
+    <Compile Include="Models\ApiKeyModel.cs" />
+    <Compile Include="Models\APIResponseModel.cs" />
+    <Compile Include="Models\ValidatorResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdminUserService.cs" />
+    <Compile Include="Services\APIService.cs" />
+    <Compile Include="Services\StringConversionService.cs" />
+    <Compile Include="Utilities\SessionUtility.cs" />
+    <Compile Include="Utilities\ValidatorUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\bootstrap.css" />
@@ -198,6 +208,7 @@
     <Content Include="fonts\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="js\admin.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="fonts\fonts\fontawesome-webfont.eot" />
@@ -262,8 +273,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Website\about.cshtml" />
-    <Content Include="Views\Website\contact.cshtml" />
     <Content Include="Views\Website\index.cshtml" />
     <Content Include="Views\Admin\login.cshtml" />
     <Content Include="Views\Admin\dashboard.cshtml" />
@@ -275,10 +284,9 @@
     <Content Include="Views\Admin\portfolio.cshtml" />
     <Content Include="Views\Admin\typography.cshtml" />
     <Content Include="Views\Admin\parts\navigation.cshtml" />
+    <Compile Include="Utilities\Settings.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

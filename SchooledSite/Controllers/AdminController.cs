@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using SchooledSite.Models;
+using SchooledSite.Utilities;
 using System.Web.Mvc;
 
 namespace SchooledSite.Controllers
@@ -10,11 +8,13 @@ namespace SchooledSite.Controllers
     {
         public ActionResult Index()
         {
-            //if user is logged in
-            //return View("login");
-
-            //if user is not logged in
-            return View("dashboard");
+            if(SessionUtility.Get<AdminUserModel>("currentUser") == null)
+            {
+                return View("login");
+            }else
+            {
+                return View("dashboard");
+            }
         }
 
         public ActionResult Blog()

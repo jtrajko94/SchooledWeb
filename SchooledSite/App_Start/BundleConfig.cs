@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace SchooledSite
 {
@@ -28,6 +27,9 @@ namespace SchooledSite
                       "~/css/admin.css",
                       "~/fonts/css/font-awesome.css",
                       "~/css/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/adminjs").Include(
+                        "~/js/admin.js"));
         }
     }
 }
