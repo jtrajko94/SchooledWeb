@@ -47,7 +47,7 @@ namespace SchooledSite.Services
                     }
                     return null;
                 }
-            }catch (Exception err)
+            }catch (Exception)
             {
                 return null;
             }

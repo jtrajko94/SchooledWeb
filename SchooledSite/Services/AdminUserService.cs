@@ -3,6 +3,7 @@ using SchooledSite.Models;
 using SchooledSite.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web;
 
@@ -24,15 +25,39 @@ namespace SchooledSite.Services
                 return null;
             }
         }
-        public static void RemoveCurrentUser()
+
+        public static ValidatorResponseModel IsValid(AdminUserModel adminuser)
         {
-            SessionUtility.Remove("currentUser");
+            var isValid = true;
+            var errFields = new Dictionary<string, string>();
+
+            if (!ValidatorUtility.Item(ValidatorType.AnyValue, adminuser.Email))
+            {
+                isValid = false;
+                errFields.Add("email", "Email is required.");
+            }
+            if (!ValidatorUtility.IsValidPassword(adminuser.Password))
+            {
+                isValid = false;
+                errFields.Add("password", "Password is required.");
+            }
+            if (!ValidatorUtility.Item(ValidatorType.AnyValue, adminuser.FirstName))
+            {
+                isValid = false;
+                errFields.Add("firstname", "First Name is required.");
+            }
+            if (!ValidatorUtility.Item(ValidatorType.AnyValue, adminuser.LastName))
+            {
+                isValid = false;
+                errFields.Add("lastname", "Last Name is required.");
+            }
+
+            var result = new ValidatorResponseModel();
+            result.IsValid = isValid;
+            result.ErrFields = errFields;
+            return result;
         }
 
-        public static void LogIn(AdminUserModel user)
-        {
-            SessionUtility.Put("currentUser", user);
-        }
 
         public static ValidatorResponseModel IsValidLogin(string email, string password, out AdminUserModel user)
         {
@@ -45,18 +70,15 @@ namespace SchooledSite.Services
                 isValid = false;
                 errFields.Add("email", "Email is required.");
             }
-            else if (!ValidatorUtility.Item(ValidatorType.AnyValue, password))
+            if (!ValidatorUtility.Item(ValidatorType.AnyValue, password))
             {
                 isValid = false;
                 errFields.Add("password", "Password is invalid.");
             }
 
-            //Check if User exists
             if (isValid)
             {
-
-                string apiKey = APIService.CreateApiKey();
-                returnUser = GetAdminUserByLogin(email, password, apiKey);
+                returnUser = GetAdminUserByLogin(email, password, APIService.CreateApiKey());
                 if (returnUser == null)
                 {
                     isValid = false;
@@ -93,11 +115,97 @@ namespace SchooledSite.Services
 
                 }
             }
-            catch (Exception err)
+            catch (Exception)
             {
                 return null;
             }
+        }
 
+        public static List<AdminUserModel> GetAllAdminUsers(string apikey)
+        {
+            try
+            {
+                string myParameters = "id=";
+                string URI = APIService.GenerateApiUrl("adminuser/get/?" + myParameters);
+
+                using (WebClient client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                    client.Headers["ApiKey"] = apikey;
+                    string responseString = client.UploadString(URI, myParameters);
+
+                    APIResponseModel responseModel = JsonConvert.DeserializeObject<APIResponseModel>(responseString);
+
+                    if (APIService.IsSuccess(responseModel))
+                    {
+                        return JsonConvert.DeserializeObject<List<AdminUserModel>>(responseModel.description);
+                    }
+                    return null;
+
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static string MergeAdminUser(AdminUserModel adminuser, string apikey)
+        {
+            try
+            {
+                string myParameters = "adminuserjson=" + JsonConvert.SerializeObject(adminuser);
+                string URI = APIService.GenerateApiUrl("adminuser/merge/?" + myParameters);
+
+                using (WebClient client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                    client.Headers["ApiKey"] = apikey;
+                    string responseString = client.UploadString(URI, myParameters);
+
+                    APIResponseModel responseModel = JsonConvert.DeserializeObject<APIResponseModel>(responseString);
+
+                    if (APIService.IsSuccess(responseModel))
+                    {
+                        return responseModel.description;
+                    }
+                    return null;
+
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public static AdminUserModel GetAdminUser(string apikey, string id)
+        {
+            try
+            {
+                string myParameters = "id=" + id;
+                string URI = APIService.GenerateApiUrl("adminuser/get/?" + myParameters);
+
+                using (WebClient client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                    client.Headers["ApiKey"] = apikey;
+                    string responseString = client.UploadString(URI, myParameters);
+
+                    APIResponseModel responseModel = JsonConvert.DeserializeObject<APIResponseModel>(responseString);
+
+                    if (APIService.IsSuccess(responseModel))
+                    {
+                        return JsonConvert.DeserializeObject<List<AdminUserModel>>(responseModel.description).FirstOrDefault();
+                    }
+                    return null;
+
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

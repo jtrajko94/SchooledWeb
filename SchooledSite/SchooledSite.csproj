@@ -285,6 +285,8 @@
     <Content Include="Views\Admin\typography.cshtml" />
     <Content Include="Views\Admin\parts\navigation.cshtml" />
     <Compile Include="Utilities\Settings.cs" />
+    <Content Include="Views\Admin\users\index.cshtml" />
+    <Content Include="Views\Admin\users\add-edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,51 @@
+﻿@model AdminUserModel
+
+@{ 
+    bool isAdd = ViewBag.Action == "Add";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Schooled</title>
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        
+        @Html.Partial("parts/navigation", "adminusers")
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>@(isAdd ? "Add" : "Edit") User</h1>
+                    <form id="user-form" action="/users" method="post" role="form">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input id="user-email" name="email" class="form-control" type="text" value="@(isAdd ? "" : Model.Email)">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input id="user-password" name="password" class="form-control" type="password">
+                        </div>
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input id="user-firstname" name="firstname" class="form-control" type="text" value="@(isAdd ? "" : Model.FirstName)">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input id="user-lastname" name="lastname" class="form-control" type="text" value="@(isAdd ? "" : Model.LastName)">
+                        </div>
+                        <input type="hidden" id="action" name="action" value="@ViewBag.Action"/>
+                        <input type="hidden" id="rowkey" name="rowkey" value="@(isAdd ? "" : Model.AdminUserRowKey)" />
+                        <button id="user-submit" type="submit" class="btn btn-default">Save</button>
+                        <button id="user-cancel" onclick="window.location='/admin/users'" type="button" class="btn">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -23,12 +23,14 @@
             <li @(Model == "typography" ? "class=active" : "")><a href="/admin/typography"><i class="fa fa-font"></i> Typography</a></li>
             <li @(Model == "bootstrap-elements" ? "class=active" : "")><a href="/admin/bootstrap-elements"><i class="fa fa-list-ul"></i> Bootstrap Elements</a></li>
             <li @(Model == "bootstrap-grid" ? "class=active" : "")><a href="/admin/bootstrap-grid"><i class="fa fa-table"></i> Bootstrap Grid</a></li>
+
+            <li @(Model == "adminusers" ? "class=active" : "")><a href="/admin/users"><i class="fa fa-user"></i> Users</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown user-dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @(user.FirstName + " " + user.LastName)<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                    <li><a href="#" id="logout-user"><i class="fa fa-power-off"></i> Log Out</a></li>
                 </ul>
             </li>
         </ul>
