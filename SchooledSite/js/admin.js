@@ -68,7 +68,7 @@
                     success: function (data) {
                         if (!data.IsValid) {
                             button.removeAttr("disabled");
-                            button.html("Login");
+                            button.html("Save");
                             if (data.ErrFields.email) $("#user-email").parent().addClass("has-error");
                             if (data.ErrFields.password) $("#user-password").parent().addClass("has-error");
                             if (data.ErrFields.firstname) $("#user-firstname").parent().addClass("has-error");
